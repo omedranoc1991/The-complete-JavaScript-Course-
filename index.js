@@ -65,16 +65,35 @@ console.log(totalBills);*/
 
 // Challenge 4
 
-var johnObject = {
-    name :  "John",
-    mass : 75,
-    height : 1.70 
+var john = {
+    name : "John",
+    mass : 92,
+    height : 1.95,
+    calcBMI : function() {
+       this.bmi = this.mass/(this.height*this.height) ;
+       return this.bmi;
+    }
 };
 
-var markObject = {
+var mark = {
     name : "Mark",
-    mass : 80,
-    height : 1.90
+    mass : 78,
+    height : 1.69,
+    calcBMI : function() {
+        this.bmi = this.mass/(this.height*this.height) ;
+        return this.bmi;
+    }
 };
 
-console.log(johnObject);
+
+if(john.calcBMI() > mark.calcBMI()){
+    console.log("John's BMI highest than Mark"+": John has"+" "+john.bmi+" "+"BMI")
+}else if(john.bmi < mark.bmi){
+    console.log("Mark's BMI highest than John"+": Mark has"+" "+mark.bmi+" "+"BMI")
+}else{
+    console.log("john and Mark have the same BMI")
+}
+
+console.log(john, mark)
+
+
