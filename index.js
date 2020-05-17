@@ -39,7 +39,7 @@ console.log(johnAverangeScore + ' ' + ' ' + mikeAverangeScore + ' ' + maryAveran
 
 // Challenge 3
 
-function tipCalculator (bill) {
+/*function tipCalculator (bill) {
      if (bill < 50){ 
          return bill * 0.2;
       }else if(bill >= 50 && bill < 200){
@@ -61,4 +61,20 @@ var totalBills = [bills[0] + tips[0],
                   bills[2] + tips[2]];
 
 
-console.log(totalBills);
+console.log(totalBills);*/
+
+// Challenge 4
+
+var johnObject = {
+    name :  "John",
+    mass : 75,
+    height : 1.70 
+};
+
+var markObject = {
+    name : "Mark",
+    mass : 80,
+    height : 1.90
+};
+
+console.log(johnObject);
