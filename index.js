@@ -1,4 +1,4 @@
-// First code challenge
+// Challenge 1
 
 /* var mMass = 90;
 var mHeight = 1.80;
@@ -14,9 +14,9 @@ var markVSjohn = mBMI > jBMI;
 
 console.log('is Marks BMI higher than Johns BMI?'+' '+ markVSjohn ) */
 
-// Second code challenge 
+// Challenge 2 
 
-var johnAverangeScore = (150 + 120 + 103)/3;  //104
+/*var johnAverangeScore = (150 + 120 + 103)/3;  //104
 
 var mikeAverangeScore = (116 +  94 + 123)/3;  //111
 
@@ -35,4 +35,30 @@ if (johnAverangeScore > mikeAverangeScore &&  johnAverangeScore > maryAverangeSc
     }
 
 
-console.log(johnAverangeScore + ' ' + ' ' + mikeAverangeScore + ' ' + maryAverangeScore )
+console.log(johnAverangeScore + ' ' + ' ' + mikeAverangeScore + ' ' + maryAverangeScore )*/
+
+// Challenge 3
+
+function tipCalculator (bill) {
+     if (bill < 50){ 
+         return bill * 0.2;
+      }else if(bill >= 50 && bill < 200){
+          return bill * 0.15;
+      }else{
+          return bill * 0.1;
+      } 
+
+}; 
+
+var bills = [124, 48, 268];
+
+var tips = [tipCalculator(bills[0]),
+            tipCalculator(bills[1]),
+            tipCalculator(bills[2])];
+
+var totalBills = [bills[0] + tips[0],
+                  bills[1] + tips[1], 
+                  bills[2] + tips[2]];
+
+
+console.log(totalBills);
