@@ -65,7 +65,7 @@ console.log(totalBills);*/
 
 // Challenge 4
 
-var john = {
+/*var john = {
     name : "John",
     mass : 92,
     height : 1.95,
@@ -94,6 +94,80 @@ if(john.calcBMI() > mark.calcBMI()){
     console.log("john and Mark have the same BMI")
 }
 
-console.log(john, mark)
+console.log(john, mark)*/
+
+// Challenge 5
 
 
+
+var john = {
+   tips : [], 
+   total : [],
+   bills : [124, 48, 268, 180, 42],
+   calcTip : function (){
+      
+      for (var i = 0 ; i < this.bills.length ; i++)
+      {
+          
+          if (this.bills[i] < 50){
+            this.tips[i] = this.bills[i] * 0.2;
+            this.total[i] = this.bills[i] + this.tips[i];
+          } else if ( this.bills[i] >= 50 && this.bills[i] < 200 ){
+            this.tips[i] = this.bills[i] * 0.15;
+            this.total[i] = this.bills[i] + this.tips[i];
+          } else {
+            this.tips[i] = this.bills[i] * 0.1;
+            this.total[i] = this.bills[i] + this.tips[i];
+          }
+          
+      }
+
+   }
+  
+};
+
+john.calcTip();
+
+var mark = {
+    bills : [77, 475, 110, 45],
+    tips : [],
+    total : [],
+    calcTip : function (){
+        var percentage;
+        for(var i = 0 ; i < this.bills.length ; i++ ){
+            var bill = this.bills[i];
+            if (bill < 100){ percentage = 0.2;
+            } else if (bill >= 100 && bill < 300){
+                percentage = 0.1;
+            } else {
+                percentage = .25;
+            }
+            this.tips[i] = bill * percentage;
+            this.total[i] = this.tips[i] + bill;
+
+        }
+        
+    }
+};
+
+mark.calcTip();
+
+function calcAverage (tips){
+    var sum = 0;
+    for(var j = 0 ; j < tips.length ; j++)
+     { sum = sum + tips[j];}
+     return sum / tips.length
+}
+
+john.average = calcAverage (john.tips);
+mark.average = calcAverage (mark.tips);
+
+console.log(john, mark);
+
+if (john.average > mark.average){
+      console.log("John's family paid more tips");
+}else if (mark.average> john.average) {
+      console.log("Mark's family paid more tips") 
+}else{
+    console.log("they paid the same tips")
+}
