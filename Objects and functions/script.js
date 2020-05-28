@@ -120,7 +120,7 @@ interviewJobs("Unemployed")("Oscar") */
 
 //call , apply and bind
 
-var oscar = {
+/*var oscar = {
     name : "oscar",
     age : 29,
     job : "unemployed",
@@ -150,31 +150,222 @@ oscar.presentation.call(saul,"formal","afternoon");
 
 // bind
 
-var typePresentation = oscar.presentation.bind(oscar,"formal");
+var typePresentation = oscar.presentation.bind(oscar," ", "night");
 
-typePresentation("night");
+typePresentation("formal"); */
+
+//exercice
+
+/*var familyAge = [1959, 1965, 1985, 2005];
+
+var arrayCalc = function (array, fn){
+    var ages = [];
+    for (var i = 0 ; i < array.length; i++){
+        ages.push(fn(array[i]));
+    }
+return ages;
+}
+
+function calcAge (element){
+    return 2020 - element;
+}
+
+function isFullAge (limit, element){
+    return element >= limit;   
+}
+
+var y = isFullAge.bind(this, 20)
+
+var x = arrayCalc(familyAge, calcAge);
+console.log(arrayCalc(x, y)) */
+
+//CODING CHALLENGE !!
+
+/*(function (){
+
+    //1.Function constructor
+    var Question = function(question, answers, correctAnswer){
+        this.question = question;
+        this.answers = answers;
+        this.correctAnswer= correctAnswer;  
+    
+    }
+    
+    //2. Method 1
+    Question.prototype.displayQuestion = function(){
+        console.log(this.question) 
+        for(var i = 0 ; i < this.answers.length ; i++){       
+            console.log(i+ ":" + this.answers[i])  
+        }       
+    }
+    
+    //3. Method 2
+    
+    Question.prototype.cAnswer = function(prompt){
+        var score = 0
+        if( prompt === this.correctAnswer){
+            console.log("Correct answer")
+            score = score + 1
+            console.log("your current score is "+ score)
+        }else{
+            console.log("The answer is incorrect")
+            console.log("your current score is "+ score)
+        }
+    }
+    
+    //4. Questions
+    
+    var question1 = new Question (
+        "How old are you ?", [25 , 29,18], 1
+    )
+    
+    var question2 = new Question (
+        "What is my brother's name ?", ["saul", "pedro", "camilo"], 0
+    )
+    
+    var question3 = new Question (
+        "what is my dog's name ?", ["tita", "chiripa", "luna"], 2
+    ) 
+    
+    var question4 = new Question(
+        "What is my favorite color ?", ["green","black","yellow"], 1
+    )
+    
+    var question5 = new Question(
+        "What did I study ?", ["economist","medicine","arts"], 0
+    )
+    
+    //5. Array
+    
+    var allQuestions = [question1,question2,question3,question4,question5]
+    
+    //6. Random question
+    
+    var x = Math.floor(Math.random() * allQuestions.length )
+    var randomQuestion = allQuestions[x]
+    
+    var test = randomQuestion.displayQuestion()
+    
+    //7. Window prompt
+    
+    var y = parseInt(prompt("Please select the correct answer (just type the number)"))
+    
+    var test2 = randomQuestion.cAnswer(y)
+
+   //8. new question display
+    
+    var line = ("-------------------------------------")
+    console.log(line)
+
+   
+    
+})()*/
+
+(function (){
+
+    //1.Function constructor
+    var Question = function(question, answers, correctAnswer){
+        this.question = question;
+        this.answers = answers;
+        this.correctAnswer= correctAnswer;  
+    
+    }
+    
+    //2. Method 1
+    Question.prototype.displayQuestion = function(){
+        console.log(this.question) 
+        for(var i = 0 ; i < this.answers.length ; i++){       
+            console.log(i+ ":" + this.answers[i])  
+        }       
+    }
+    
+    //3. Method 2
+    
+    Question.prototype.cAnswer = function(prompt,callBack){
+        var sc ;
+        if( prompt === this.correctAnswer){
+            console.log("Correct answer")
+            sc = callBack(true)
+           
+        }else{
+            console.log("The answer is incorrect")
+            sc = callBack(false)
+        }
+        this.displayScore(sc)
+    }
 
 
+    Question.prototype.displayScore = function(score){
+            console.log("your current score is "+ score)
+            console.log("---------------------")
+    }
+    
+    //4. Questions
+    
+    var question1 = new Question (
+        "How old are you ?", [25 , 29,18], 1
+    )
+    
+    var question2 = new Question (
+        "What is my brother's name ?", ["saul", "pedro", "camilo"], 0
+    )
+    
+    var question3 = new Question (
+        "what is my dog's name ?", ["tita", "chiripa", "luna"], 2
+    ) 
+    
+    var question4 = new Question(
+        "What is my favorite color ?", ["green","black","yellow"], 1
+    )
+    
+    var question5 = new Question(
+        "What did I study ?", ["economist","medicine","arts"], 0
+    )
+    
+    //5. Array
+    
+    var allQuestions = [question1,question2,question3,question4,question5]
 
+    function score (){
+        var sc = 0
+        return function(correctAnswer){
+            if(correctAnswer){
+                sc++
+            }return sc
+        }
+        
+    }
+    
+    var keepScore = score();
 
+    //function new question 
 
+    function nextQuestion (){
 
+        //6. Random question
+        var x = Math.floor(Math.random() * allQuestions.length )
+        var randomQuestion = allQuestions[x]
+        
+        var test = randomQuestion.displayQuestion()
+        
+        //7. Window prompt
+        
+        var y = prompt("Please select the correct answer (just type the number)")
+        
+        if (y !== "exit"){
+            randomQuestion.cAnswer(parseInt(y),keepScore)
+            nextQuestion()
+        }
+         
+     
+        
+    }
+    
+  
+    nextQuestion()
+   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      
+    
+})()
 
