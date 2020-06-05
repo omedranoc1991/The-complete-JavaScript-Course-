@@ -301,7 +301,7 @@ console.log(ages.filter(element => element > 14))*/
 //arrays spread operator
 
 //ES6
-const numbers1 = [1,2,3,4]
+/*const numbers1 = [1,2,3,4]
 
 function sum (a,b,c,d){
    return  a+b+c+d
@@ -340,11 +340,150 @@ function fullAge (limit,...ages){
     })
 }
 
-fullAge(20,15,12,21,34,15)
+fullAge(20,15,12,21,34,15)*/
+
+//default parameter
+
+/*function OscarFamily (name,  relationship, lastName = "Medrano"){
+
+    this.name = name
+    this.lastName = lastName
+    this.relationship = relationship    
+
+}
+
+console.log( new OscarFamily("saul", "hermano"))*/
+
+// Maps
+
+/*const oscarFamily = new Map ();
+oscarFamily.set("question", "who are my brother?")
+oscarFamily.set(1, "Daniel");
+oscarFamily.set(2, "Saul");
+oscarFamily.set(3, "Julian");
+oscarFamily.set(4, "Javier")
+oscarFamily.set("answer", 2)
+oscarFamily.set(true , "Correct answer")
+oscarFamily.set(false, "wrong, try again")
 
 
+console.log(oscarFamily.get("question"))
 
 
+oscarFamily.forEach((value, key) => {
+
+    if(typeof(key) === "number"){
+
+        console.log( `Answer ${key}: ${value}`)
+
+    }
+    
+})
+
+let ans = parseInt(prompt("write the correct answer"))
+
+console.log(oscarFamily.get(ans === oscarFamily.get("answer"))) */
+
+// classes and subclases
+
+//super class (something like a principla class)
+/*class Person {
+    constructor (name, lastName, yearOfBirth) {
+
+         this.name = name;
+         this.lastName = lastName;
+         this.yearOfBirth = yearOfBirth
+
+    }
+
+    calcAge () {
+
+        var age = new Date().getFullYear() - this.yearOfBirth
+        console.log(age)
+        
+    }
+}
+
+var oscar = new Person("saul", "medrano", 1991)
+
+//oscar.calcAge(); 
+
+//sub class
+
+class Athlete extends Person {
+    constructor (name,lastName,yearOfBirth,competencies, medals ){
+        super(name,lastName,yearOfBirth)
+           this.competencies = competencies
+           this.medals = medals
+    }
+
+    wonMedal (){
+        this.medals++
+        console.log(this.medals++)     
+    }
+    
+}
 
 
+var oscar6 = new Athlete ("oscar","medrano", 1991 , 10 , 8)
+
+
+console.log(oscar6)
+
+oscar6.calcAge()
+oscar6.wonMedal() */
+
+// CHALLENGE 8
+
+// 3 parks and 4 streets 
+
+/*const parksArea = [1500, 1200, 2000]
+
+const treeNumber = [700, 550 , 950]
+
+const parks = new Map ();
+parks.set("area", "trees")
+parks.set(1500, 700)
+parks.set(1200, 550)
+parks.set(2000, 950)
+
+parks.forEach((area,trees) =>{
+    if (typeof(trees) === "number"){
+        let density = trees / area
+        console.log(density)
+    }
+})*/
+
+class park  {
+    constructor (name , area, trees, age){
+        this.name = name
+        this.area = area
+        this.trees = trees
+        this.age = age
+    } 
+
+    density () {
+        var den = Math.floor((this.trees / this.area)*100)
+        console.log(`${this.name} park has a tree density of ${den} trees per meter`)
+    }
+    
+        
+}
+
+const lisboa = new park("lisboa", 1500, 860,54)
+lisboa.density()
+const gaitana = new park("gaitana",800,200,75)
+gaitana.density()
+const villaMaria =new park("villa Maria", 2000, 950,25)
+villaMaria.density()
+
+const parks = [lisboa.age, gaitana.age, villaMaria.age]
+
+const ageAverage = ((a,b,c) => {
+    
+    average = (a+b+c)/parks.length
+
+    console.log(`Our 3 parks have  an averange  of ${average} years)`)})
+
+ageAverage(...parks)
 
