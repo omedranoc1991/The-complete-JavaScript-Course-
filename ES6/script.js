@@ -454,6 +454,10 @@ parks.forEach((area,trees) =>{
     }
 })*/
 
+/*// My solution
+
+console.log(`PARKS REPORT`)
+
 class park  {
     constructor (name , area, trees, age){
         this.name = name
@@ -474,16 +478,177 @@ const lisboa = new park("lisboa", 1500, 860,54)
 lisboa.density()
 const gaitana = new park("gaitana",800,200,75)
 gaitana.density()
-const villaMaria =new park("villa Maria", 2000, 950,25)
+const villaMaria =new park("villa Maria", 2000, 1100,25)
 villaMaria.density()
 
-const parks = [lisboa.age, gaitana.age, villaMaria.age]
+const parks = [lisboa, gaitana, villaMaria]
 
 const ageAverage = ((a,b,c) => {
     
-    average = (a+b+c)/parks.length
+    average = (a.age+b.age+c.age)/parks.length
 
     console.log(`Our 3 parks have  an averange  of ${average} years)`)})
 
 ageAverage(...parks)
 
+//const moreTrees = ()
+
+
+const moreTress = parks.forEach( element => {
+    if(element.trees > 1000){
+        console.log(`${element.name} has more than 1000 trees`)
+    }
+})
+
+console.log(`STREETS REPORT`)
+
+
+class street {
+    constructor(name, built , length ){
+        this.name = name
+        this.built = built
+        this.length = length
+    }
+   
+} 
+
+const street1 = new street("black", 1945 ,50)
+const street2 = new street("white", 1965, 150)
+const street3 = new street("blue", 1970, 180)
+const street4 = new street("red", 1991, 250 )
+
+
+const streets = [street1,street2,street3,street4]
+
+const totalLength = ((a,b,c,d) => {
+
+    var sum = a.length + b.length + c.length + d.length
+
+    var averange = sum/streets.length
+
+    console.log(`Our 4 streets have a total length of ${sum} km , with and averange of ${averange} km `)
+     
+})
+
+totalLength(...streets)
+
+const kindOfTown = streets.forEach( element => {
+    if (element.length >= 200){
+        console.log(`${element.name} street, built in ${element.built}, is a Huge street`)
+    } else if (element.length >= 100 && element.length < 200){
+        console.log(`${element.name} street, built in ${element.built}, is a big street`)
+    }else if (element.length >= 50 && element.length < 100 ){
+        console.log(`${element.name} street, built in ${element.built}, is a small street`)
+    }else if (element.length >= 0 && element.length < 50 ){
+        console.log(`${element.name} street, built in ${element.built}, is a tiny street`)
+    }else if (element.length === undefined){
+        console.log(`${element.name} street, built in ${element.built}, is a normal street`)
+    }else{
+        console.log(`${element.name} street, built in ${element.built}, the length is misspelled`)
+    }
+}) */
+
+// jonas solution 
+
+//super classes
+class Element {
+    constructor(name, builtYear){
+        this.name = name
+        this.builtYear = builtYear
+    }
+}
+
+//subclasses
+class Park extends Element{
+    constructor(name, builtYear, area, numTrees){
+        super(name, builtYear)
+        this.area = area
+        this.numTrees = numTrees
+    }//method
+
+    treeDensity (){
+        const density = this.numTrees/this.area
+        console.log(`${this.name} has a tree density of ${density} trees per square km.`)
+    }
+}
+
+class Street extends Element{
+    constructor(name, builtYear, length, size = 3 ){
+        super(name, builtYear)
+        this.length = length
+        this.size = size
+    }//Methods
+
+    classifyStreet(){
+        const classification = new Map ();
+        classification.set(1, "tiny")
+        classification.set(2, "small")
+        classification.set(3, "normal")
+        classification.set(4, "big")
+        classification.set(5,"huge")
+
+        console.log(`${this.name}, build in ${this.builtYear}, is  a  ${classification.get(this.size)} street.`)
+    }
+}
+
+//new elements 
+
+const allParks =[new Park ("Green Park",1987,0.2,215),
+new Park ("National Park",1984,2.9,3541),
+new Park ("Oak Park",1953,0.4,949)]
+
+const allStreets = [new Street ("Ocean avenue",1999,1.1,4),
+new Street ("Evergreen Street", 2008, 2.7, 2),
+new Street("Sunset Boulevard",1982,2.5,5),
+new Street("4th street", 2015, 0.8)]
+
+
+function calc(arr){
+    const sum = arr.reduce((prev, cur, index) =>
+        prev + cur , 0  )
+
+    return [sum, sum / arr.length]
+}
+
+//functions reports
+
+function reportPark (p){
+console.log("----------PARKS REPORTS-------------")
+
+//DENSITY
+
+p.forEach(element => { 
+
+    element.treeDensity()
+    
+});
+
+//AVERAGE AGE
+
+const ages =p.map(el => new Date().getFullYear() - el.builtYear)
+const [totalAge , avgAge] = calc(ages)
+console.log(`Our ${p.length} parks have an averange  of ${avgAge} years`)
+
+//WHICK PARK HAS MORE THAN 1000 TREES
+
+const i = p.map(el => el.numTrees).findIndex( el => el >= 1000)
+console.log(`${p[i].name} has more than 1000 trees`)
+
+}
+
+function reporStreet (s){
+console.log("----------STREETS REPORTS-------------")
+
+//TOTAL AND AVERANGE LENGTH OF THE TOWN'S STREETS 
+
+const [totalLength, avgLength] = calc(s.map(el => el.length))
+console.log(`our ${s.length} streets have  a total length of ${totalLength} km , with an averange  of ${avgLength}`)
+
+//CLASSIFY SIZES
+
+s.forEach(el => el.classifyStreet())
+
+}
+
+reportPark(allParks)
+reporStreet(allStreets)
