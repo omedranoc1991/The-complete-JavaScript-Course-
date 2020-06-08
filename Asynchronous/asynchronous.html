@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Asynchronous JavaScript</title>
+</head>
+<body>
+    <h1>Asynchronous JavaScript</h1>
+    <script>
+
+        //setTimeout function ()
+
+       /* const test2 = () => {
+           setTimeout(() => {console.log("How are you?")},2000) 
+        }
+
+        const test1 = () => {
+            console.log("hello oscar")
+            test2()
+           setTimeout(()=> {console.log("How was your day?")}, 4000) 
+        }
+        
+        test1();*/
+
+        //Asynchronous with call backfunction
+
+        /*function getRecipe (){
+            setTimeout(() => {
+                recipeID = [1,2,3,4,5,6,7,8]
+                console.log(recipeID)
+
+                setTimeout((id) => {
+
+                    const recipe = {
+                        title : "pasta",
+                        autor : "oscar"
+                    }
+
+                    console.log(`${id} : ${recipe.title}`)
+
+                    setTimeout(() => {
+                        const recipe2 = {
+                        title : "pasta",
+                        autor : "oscar"
+                    }
+                    console.log(recipe)
+                    },1500)
+
+                },1500,recipeID[0] )
+            }, 2000)
+        }
+
+        getRecipe()*/
+
+        //Asynchronous with promises
+
+        /*const getIDS = new Promise((resolve, reject) => {
+            setTimeout(() => {resolve([1,2,3,4,5,6,7,8])},1500)
+            
+        })
+
+        const getRecipe = recID => {
+            return new Promise((resolve, reject) => {
+                setTimeout(ID => {
+                    const recipe = {
+                        title : "pasta",
+                        autor : "oscar"
+                    }
+                    resolve(`${ID} : ${recipe.title}`)
+                },1500,recID)
+            })
+        }
+
+        const getRelated = publisher =>{
+            return new Promise((resolve, reject) => {
+                setTimeout(pub => {
+                    const recipe = {
+                        title : "pizza",
+                        autor : "oscar"
+                    }
+                    resolve(`${pub}:${recipe.title}`)
+                },1500, publisher)
+            })
+        }
+
+        /*getIDS
+        .then(ids => {
+            console.log(ids)
+            return getRecipe(ids[0])
+        })
+        .then(recipe => {
+            console.log(recipe)
+            return getRelated("oscar medrano")
+        })
+        .then(recipe => {
+            console.log(recipe)
+        })
+        .catch(err =>{
+            console.log("error")
+        })*/
+
+        //Async / await
+
+        /*async function getRecipesAW () {
+            const IDs = await getIDS
+            console.log(IDs)
+            const recipe = await getRecipe(IDs[0])
+            console.log(recipe)
+            const related = await getRelated("oscar Medrano")
+            console.log(related)
+
+            return recipe
+        }
+
+        getRecipesAW().then(result => {console.log(result)})*/
+
+        //making ajax call with fetch and then y catch 
+
+        function getWater(city){
+        fetch (`https://www.metaweather.com/api/location/${city}/`)
+
+        .then(result => {console.log(result)
+        return result.json() })
+        .then(data => {
+            const today = data.consolidated_weather[0]
+            console.log(`temperatures in ${data.title} stay between ${today.min_temp} and ${today.max_temp}`)
+        })
+        .catch(error => console.log(error))
+        } 
+
+        getWater(44418)
+
+        // maming ajax with fetch but wit async y await
+
+
+        async function getWaterAW (city){
+
+            try{
+            const result = await fetch (`https://www.metaweather.com/api/location/${city}/`)
+            const data = await result.json()
+            const tomorrow = data.consolidated_weather[1]
+            console.log(`temperatures tomorrow in ${data.title} stay between ${tomorrow.min_temp} and ${tomorrow.max_temp}`)
+            
+            return data
+
+            }catch{
+                console.log(error)}           
+
+        }
+
+        getWaterAW(44418)
+        let datalondon;
+        getWaterAW(44418).then(result =>{
+            datalondon = result
+            console.log(datalondon)
+        })
+    </script>
+</body>
+</html>
